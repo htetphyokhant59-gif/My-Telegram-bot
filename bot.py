@@ -1,4 +1,3 @@
-cat << 'EOF' > /sdcard/Download/bot.py
 import os
 import logging
 import edge_tts
@@ -18,13 +17,10 @@ async def text_to_speech(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     status_message = await update.message.reply_text("🔊 Speechma စတိုင် အဖြတ်အတောက်မှန်အောင် ဖန်တီးနေပါတယ်...")
     
-    # Permission Denied မဖြစ်စေရန် အသံဖိုင်ကို Termux ရဲ့ internal home ထဲမှာ ယာယီသိမ်းခိုင်းထားပါတယ်
-    filename = os.path.expanduser(f"~/giuseppe_multi_{chat_id}.mp3")
+    filename = f"giuseppe_multi_{chat_id}.mp3"
     
     try:
         voice_model = "it-IT-GiuseppeMultilingualNeural"
-        
-        # Speechma ဝဘ်ဆိုက်ကဲ့သို့ ဖြည်းဖြည်းမှန်မှန်နှင့် သဘာဝကျကျ ဖြတ်တောက်ရန် rate="-12%"
         communicate = edge_tts.Communicate(raw_text, voice_model, rate="-12%")
         await communicate.save(filename)
         
@@ -63,4 +59,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-EOF
